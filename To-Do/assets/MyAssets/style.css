@@ -14,6 +14,7 @@ h1 {
   font-weight: 700 !important;
   font-size: 36px !important;
   line-height: 48px !important;
+  position: relative;
 }
 
 h2 {
@@ -23,6 +24,7 @@ h2 {
   color: black !important;
   margin: 0 !important;
   padding: 0 !important;
+  position: relative;
 }
 
 h3 {
@@ -32,6 +34,7 @@ h3 {
   font-size: 19px !important;
   line-height: 26px !important;
   color: #707070 !important;
+  position: relative;
 }
 
 .todo-title {
@@ -47,6 +50,24 @@ h3 {
   padding-right: 24px !important;
 }
 
+.todo-clear-all {
+  width: 53px;
+  height: 53px;
+  border: 2px solid #ffa800;
+  box-sizing: border-box;
+  border-radius: 30px;
+  margin-right: 10px;
+  font-size: 30px;
+  line-height: 30px;
+  color: white;
+  background-color: red;
+}
+
+.todo-clear-all:hover .fa-xmark {
+  transition: 0.5s;
+  transform: rotate(360deg);
+}
+
 .todo-add-icon {
   width: 53px;
   height: 53px;
@@ -54,6 +75,14 @@ h3 {
   border: 2px solid #ffa800;
   box-sizing: border-box;
   border-radius: 30px;
+  font-size: 30px;
+  line-height: 30px;
+  color: white;
+}
+
+.todo-add-icon:hover .fa-plus {
+  transition: 0.5s;
+  transform: rotate(360deg);
 }
 
 .todo-record-list {
@@ -66,7 +95,7 @@ h3 {
 }
 
 ::-webkit-scrollbar {
- width: 0%;
+  width: 0%;
 }
 
 .todo-record {
@@ -98,7 +127,8 @@ h3 {
 }
 
 .todo-record-text h2 {
-  width: 315px;
+  width: min-content;
+  max-width: 315px;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
@@ -112,7 +142,7 @@ h3 {
 }
 
 .todo-unchecked {
-    background: inherit;
+  background: inherit;
 }
 
 .todo-checked {
@@ -128,9 +158,32 @@ h3 {
   background-size: 13px 13px;
 }
 
-.todo-checked .todo-record-text h2 {
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
+@keyframes strike {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.strike {
+  position: relative;
+}
+
+.todo-checked .todo-record-text h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: black;
+  animation-name: strike;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .todo-add-container {
