@@ -9,7 +9,7 @@ let minId = 100000;
 let maxId = 999999;
 
 function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 let taskList = [];
@@ -28,26 +28,43 @@ const hideAddContainer = () => {
 };
 
 const clearTaskList = () => {
-    taskList = [];
-    localStorage.removeItem("taskListLS");
-    document.getElementById("todo-list").innerHTML= '';
-} 
+  taskList = [];
+  localStorage.removeItem("taskListLS");
+  document.getElementById("todo-list").innerHTML = "";
+};
 
 const checkTheTask = (clicked_id) => {
-    let clickedTaskId = parseInt(clicked_id.split("-")[1]);
-    let clickedTask = taskList.find(obj => {return obj.taskId === clickedTaskId}) ;
-    
-    if (clickedTask.isCompleted) {
-      clickedTask.isCompleted = false;
-    }
-    else {
-      clickedTask.isCompleted = true;
-    }
+  let clickedTaskId = parseInt(clicked_id.split("-")[1]);
+  let clickedTask = taskList.find((obj) => {
+    return obj.taskId === clickedTaskId;
+  });
 
-    localStorage.setItem("taskListLS", JSON.stringify(taskList));
-    document.getElementById("todo-list").innerHTML= '';
-    listTasks();
+  if (clickedTask.isCompleted) {
+    clickedTask.isCompleted = false;
+  } else {
+    clickedTask.isCompleted = true;
+  }
+
+  localStorage.setItem("taskListLS", JSON.stringify(taskList));
+  document.getElementById("todo-list").innerHTML = "";
+  listTasks();
+};
+
+function arrayRemove(arr, value) { 
+    
+  return arr.find(function(ele){ 
+      return ele != value; 
+  });
 }
+
+const deleteTheTask = (clicked_id) => {
+  let clickedTaskId = parseInt(clicked_id.split("-")[1]);
+  taskList.splice(taskList.findIndex(obj => obj.taskId === clickedTaskId), 1)
+
+  localStorage.setItem("taskListLS", JSON.stringify(taskList));
+  document.getElementById("todo-list").innerHTML = "";
+  listTasks();
+};
 
 const createTask = () => {
   let task = Object.create(todoTask);
@@ -64,13 +81,19 @@ const createTask = () => {
 
 const addTaskItemToTaskListHtml = (task, i) => {
   const taskListEl = document.getElementById("todo-list");
-  const taskItemHtml =
-  `<li class="todo-record ${isChecked[task.isCompleted]}">
-        <button class="todo-checkbox" onclick="checkTheTask(this.id)" id="task-${task.taskId}"></button>
+  const taskItemHtml = `<li class="todo-record ${isChecked[task.isCompleted]}">
+        <button class="todo-checkbox" onclick="checkTheTask(this.id)" id="task-${
+          task.taskId
+        }"></button>
         <div class="todo-record-text">
             <h2>${task.title}</h2>
             <h3>${task.description}</h3>
         </div>
+        <button class="todo-delete" onclick="deleteTheTask(this.id)" id="task-${
+          task.taskId
+        }">
+           <i class="fa-solid fa-trash-can"></i>
+        </button>
     </li>`;
   taskListEl.insertAdjacentHTML("beforeend", taskItemHtml);
 };
@@ -80,9 +103,9 @@ const listTasks = () => {
 
   if (taskListLS) {
     taskList = JSON.parse(taskListLS);
-    for (let i = 0; i < taskList.length; i++ ) {
-        addTaskItemToTaskListHtml(taskList[i] , i + 1)
-    };
+    for (let i = 0; i < taskList.length; i++) {
+      addTaskItemToTaskListHtml(taskList[i], i + 1);
+    }
   }
 };
 

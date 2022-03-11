@@ -104,20 +104,18 @@ h3 {
   width: 414px;
   margin-bottom: 12px;
   padding-left: 35px;
-  padding-right: 24px;
   display: flex;
   align-items: center;
 }
 
 .todo-checkbox {
-  display: flex;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background: #ffffff;
   border: 2px solid #565656;
   box-sizing: border-box;
   position: relative;
-  bottom: 12px;
+  border-radius: 20px;
 }
 
 .todo-record-text {
@@ -128,17 +126,26 @@ h3 {
 
 .todo-record-text h2 {
   width: min-content;
-  max-width: 315px;
+  max-width: 300px;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
 
 .todo-record-text h3 {
-  width: 315px;
+  width: 300px;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
+}
+
+.todo-delete {
+  position: relative;
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 .todo-unchecked {
