@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do // Home Page</title>
-    <link rel="stylesheet" href="assets/MyAssets/style.css" />
-    <link rel="stylesheet" href="assets/Bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/FontAwesome/css/all.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/all.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,8 +30,7 @@
       </section>
     </header>
     <main>
-      <ul class="todo-record-list" id="todo-list">
-      </ul>
+      <ul class="todo-record-list" id="todo-list"></ul>
     </main>
     <footer>
       <form
@@ -40,7 +39,13 @@
         id="add-task-container"
       >
         <div class="todo-add-backgorund" onclick="hideAddContainer()"></div>
-        <input class="todo-form-title" type="text" placeholder="Title" id="new-task-title" maxlength="50"/>
+        <input
+          class="todo-form-title"
+          type="text"
+          placeholder="Title"
+          id="new-task-title"
+          maxlength="50"
+        />
         <textarea
           class="todo-form-description"
           name=""
@@ -60,7 +65,7 @@
         </button>
       </form>
     </footer>
-    <script src="assets/MyAssets/app.js"></script>
-    <script src="assets/Bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@ body {
   width: 414px;
   height: 736px;
   overflow: hidden;
-  background-image: url(/assets/Images/Background/todo-bg.png);
+  background-image: url('../images/Background/todo-bg.png');
   background-repeat: no-repeat;
   background-position: top;
   background-size: auto;
@@ -159,7 +159,7 @@ h3 {
 .todo-checked .todo-checkbox {
   background-color: #9e00ff !important;
   border: 4px solid #8b00e1;
-  background-image: url(/assets/Images/Check/checked.png);
+  background-image: url(../images/Check/checked.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 13px 13px;
