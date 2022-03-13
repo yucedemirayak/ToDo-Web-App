@@ -16,8 +16,8 @@
     />
   </head>
   <body>
-    <div class="app-container mx-auto">
-      <div class="" id="add-background" onclick="toggleAddContainer()"></div>
+    <div class="app-container">
+      <div class="row col-11 mx-auto" id="add-background" onclick="toggleAddContainer()"></div>
       <section class="todo-header" id="todo-header">
         <h1 class="todo-title">TODO</h1>
         <div class="todo-button-group d-flex justify-content-end">
@@ -29,9 +29,12 @@
           </button>
         </div>
       </section>
+      
       <section class="" id="todo-list-section">
-        <ul class="todo-record-list" id="todo-list"></ul>
+        <ul class="todo-record-list" id="todo-list">
+        </ul>
       </section>
+      
       <section class="todo-container-add" id="add-task-container">
         <form class="todo-add" id="add-task">
           <input
@@ -50,12 +53,14 @@
             spellcheck="false"
             placeholder="Description"
           ></textarea>
-          <button class="todo-create-button" onclick="createTask()">
-            <i class="fa-solid fa-check todo-check-img"></i>
-            <span class="todo-create-text mx-auto">Create</span>
+          <button class="todo-create-button row" onclick="createTask()">
+            <div class="col-1" style="padding: 0 !important;"></div>
+            <span class="todo-create-text col-10">Create</span>
+            <i class="fa-solid fa-check todo-check-img col-1"></i>
           </button>
         </form>
       </section>
+      
     </div>
     <script src="js/app.js"></script>
     <script src="js/bootstrap.bundle.js"></script>

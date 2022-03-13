@@ -1,10 +1,13 @@
 body {
   font-family: "Nunito Sans", sans-serif !important;
+  display: flex;
+  justify-content: center;
 }
 
 .app-container {
-  margin-top: 5%;
-  width: 414px;
+  margin: 5% !important;
+  width: 100%;
+  max-width: 414px;
   height: 736px;
   overflow: hidden;
   background-image: url('../images/Background/todo-bg.png');
@@ -13,6 +16,7 @@ body {
   background-size: auto;
   border-radius: 20px;
   box-shadow: 5px 5px 15px #707070;
+  box-sizing: content-box;
 }
 
 h1 {
@@ -43,6 +47,21 @@ h3 {
   position: relative;
 }
 
+h4 {
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  line-height: 33px !important;
+  color: black !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative;
+}
+
+.todo-header {
+  width: 100%;
+  max-width: 414px;
+}
+
 .todo-title {
   color: white;
   margin-top: 36px !important;
@@ -52,21 +71,25 @@ h3 {
 
 .todo-button-group {
   width: 100%;
+  max-width: 414px;
   margin-top: 65px;
   padding-right: 24px !important;
 }
 
 .todo-clear-all {
   width: 53px;
-  height: 53px;
   border: 2px solid #ffa800;
   box-sizing: border-box;
   border-radius: 30px;
   margin-right: 10px;
   font-size: 30px;
-  line-height: 30px;
+  line-height: 5px;
   color: white;
   background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .todo-clear-all:hover .fa-xmark {
@@ -82,8 +105,12 @@ h3 {
   box-sizing: border-box;
   border-radius: 30px;
   font-size: 30px;
-  line-height: 30px;
+  line-height: 5px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .todo-add-icon:hover .fa-plus {
@@ -93,11 +120,13 @@ h3 {
 
 .todo-record-list {
   margin-top: 6px;
-  padding-left: 0;
   margin-bottom: 0 !important;
   height: 528px !important;
   overflow-y: scroll;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {
@@ -107,39 +136,42 @@ h3 {
 .todo-record {
   background-color: #ffffff;
   height: 90px;
-  width: 414px;
+  width: 100%;
+  max-width: 414px;
   margin-bottom: 12px;
-  padding-left: 35px;
   display: flex;
   align-items: center;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .todo-checkbox {
-  width: 25px;
-  height: 25px;
+  width: 25px !important;
+  min-width: 25px !important;
+  height: 25px !important;
+  min-height: 25px !important;
   background: #ffffff;
   border: 2px solid #565656;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   position: relative;
   border-radius: 20px;
+  padding: 0 !important;
 }
 
 .todo-record-text {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  width: 100%;
 }
 
 .todo-record-text h2 {
   width: min-content;
-  max-width: 280px;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
 
 .todo-record-text h3 {
-  width: 280px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden !important;
   text-overflow: ellipsis;
@@ -173,7 +205,7 @@ h3 {
 
 @keyframes strike {
   0% {
-    width: 0;
+    width: 0%;
   }
   100% {
     width: 100%;
@@ -184,14 +216,16 @@ h3 {
   position: relative;
 }
 
-.todo-checked .todo-record-text h2::after {
+
+
+.todo-checked .text-line-through {
   content: "";
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
   height: 2px;
-  background: black;
+  background: black !important;
   animation-name: strike;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -203,7 +237,7 @@ h3 {
   display: none;
   position: relative;
   bottom: 298px;
-  width: 414px;
+  width: inherit !important;
   height: 298px ;
   border-radius: 20px;
   box-shadow: 0px -50px 100px 20px rgba(0, 0, 0, 0.4);
@@ -249,21 +283,24 @@ h3 {
 .add-background {
   position: absolute;
   width: inherit;
+  max-width: inherit;
   height: inherit;
   background: rgba(0, 0, 0, 0.3);
   transition: 2s;
   border-radius: 20px;
+  margin: 0 !important;
 }
 
 
 .todo-form-title {
-  width: 367px;
+  width: 90%;
   height: 51px;
   background: #f9f9f9;
   border: 1px solid #707070;
   box-sizing: border-box;
   padding: 10px 20px 10px 20px;
   font-size: 23px;
+  border-radius: 4px !important;
 }
 
 .todo-form-title::placeholder {
@@ -277,14 +314,14 @@ h3 {
 
 .todo-form-description {
   margin-top: 8px;
-  width: 367px;
+  width: 90%;
   height: 121px;
   background: #f9f9f9;
   border: 1px solid #707070;
   box-sizing: border-box;
   padding: 10px 20px 10px 20px;
   font-size: 23px;
-
+  border-radius: 4px !important;
   outline: none;
   box-shadow: none;
   resize: none;
@@ -317,30 +354,25 @@ h3 {
 }
 
 .todo-create-button {
-  margin-top: 22px;
-  width: 367px;
+  margin-top: 22px !important;
+  width: 90%;
   height: 53px;
   background: #c361ff;
   border: 2px solid rgba(139, 0, 225, 0.7);
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
   align-items: center;
+  border-radius: 4px !important;
 }
 
 .todo-check-img {
-  display: flex;
-  position: absolute;
-  margin-left: 114px;
   color: white;
   font-size: 20px;
   line-height: 20px;
+  right: 10px;
+  padding: 0 !important;
 }
 
 .todo-create-text {
-  display: flex;
-  align-self: center;
-
   text-transform: uppercase;
   font-style: normal;
   font-weight: 900;
@@ -348,6 +380,7 @@ h3 {
   line-height: 27px;
   text-align: center;
   color: #ffffff;
+  padding: 0 !important;
 }
 
 .todo-list-none {

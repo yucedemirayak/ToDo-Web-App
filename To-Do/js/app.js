@@ -71,26 +71,31 @@ const deleteTheTask = (clicked_id) => {
 const createTask = () => {
   let newTaskTitle = document.getElementById("new-task-title").value;
   let newTaskDescription = document.getElementById("new-task-description").value;
-
-  let task = {
-    ...ToDoTask,
-    taskId: getRndInteger(minId, maxId),
-    title: newTaskTitle,
-    description: newTaskTitle,
-  }
-  taskList = [...taskList, task];
-  localStorage.setItem("taskListLS", JSON.stringify(taskList));
-};
+  
+  if (newTaskTitle || newTaskDescription) {
+    let task = {
+      ...ToDoTask,
+      taskId: getRndInteger(minId, maxId),
+      title: newTaskTitle,
+      description: newTaskDescription,
+    }
+    taskList = [...taskList, task];
+    localStorage.setItem("taskListLS", JSON.stringify(taskList));
+  };
+}
 
 const addTaskItemToTaskListHtml = (task) => {
   const taskListEl = document.getElementById("todo-list");
-  const taskItemHtml = `<li class="todo-record ${isChecked[task.isCompleted]}">
-                          <button class="todo-checkbox" onclick="checkTheTask(this.id)" id="task-${task.taskId}"></button>
-                          <div class="todo-record-text">
-                            <h2>${task.title}</h2>
+  const taskItemHtml = `<li class="todo-record row ${isChecked[task.isCompleted]}">
+                          <button class="todo-checkbox col-1 offset-1 col-md-1 offset-md-1" onclick="checkTheTask(this.id)" id="task-${task.taskId}"></button>
+                          <div class="todo-record-text col-8 col-md-8">
+                            <h2>
+                              ${task.title}
+                              <div class="text-line-through"></div>
+                            </h2>
                             <h3>${task.description}</h3>
                           </div>
-                          <button class="todo-delete" onclick="deleteTheTask(this.id)" id="task-${task.taskId}">
+                          <button class="todo-delete col-2 col-md-2" onclick="deleteTheTask(this.id)" id="task-${task.taskId}">
                             <i class="fa-solid fa-trash-can"></i>
                           </button>
                         </li>`;
