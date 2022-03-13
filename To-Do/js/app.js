@@ -1,8 +1,8 @@
-let todoTask = {
+let ToDoTask = {
   title: "",
   description: "",
   isCompleted: false,
-  taskId: null,
+  taskId: 0,
 };
 
 let minId = 100000;
@@ -19,27 +19,28 @@ const isChecked = {
   true: "todo-checked",
 };
 
-const showAddContainer = () => {
-  document.getElementById("add-task-container").style.visibility = "visible";
+const toggleAddContainer = () => {
+  document.getElementById("add-background").classList.toggle("add-background");
+  document.getElementById("todo-header").classList.toggle("index-back");
+  document.getElementById("todo-list-section").classList.toggle("index-back");
+  document.getElementById("add-task-container").classList.toggle("show");
 };
 
-const hideAddContainer = () => {
-  document.getElementById("add-task-container").style.visibility = "hidden";
-};
 
 const clearTaskList = () => {
   taskList = [];
   localStorage.removeItem("taskListLS");
   document.getElementById("todo-list").innerHTML = "";
+  todoNothing();
 };
 
 const checkTheTask = (clicked_id) => {
+  document.getElementById(clicked_id).parentElement.classList.toggle("todo-checked")
+
   let clickedTaskId = parseInt(clicked_id.split("-")[1]);
   let clickedTask = taskList.find((obj) => {
     return obj.taskId === clickedTaskId;
   });
-
-console.log(clickedTask);
 
   if (clickedTask.isCompleted) {
     clickedTask.isCompleted = false;
@@ -48,8 +49,6 @@ console.log(clickedTask);
   }
 
   localStorage.setItem("taskListLS", JSON.stringify(taskList));
-  document.getElementById("todo-list").innerHTML = "";
-  listTasks();
 };
 
 function arrayRemove(arr, value) {
@@ -64,21 +63,21 @@ const deleteTheTask = (clicked_id) => {
     taskList.findIndex((obj) => obj.taskId === clickedTaskId),
     1
   );
-
+  document.getElementById(clicked_id).parentElement.remove();
   localStorage.setItem("taskListLS", JSON.stringify(taskList));
-  document.getElementById("todo-list").innerHTML = "";
-  listTasks();
+  if (taskList.length == 0) todoNothing(), localStorage.removeItem("taskListLS");
 };
 
 const createTask = () => {
-  let task = Object.create(todoTask);
-  task.title = document.getElementById("new-task-title").value;
-  task.description = document.getElementById("new-task-description").value;
-  task.isCompleted = false;
-  task.taskId = getRndInteger(minId, maxId);
+  let newTaskTitle = document.getElementById("new-task-title").value;
+  let newTaskDescription = document.getElementById("new-task-description").value;
 
-  document.getElementById("add-task-container").reset();
-
+  let task = {
+    ...ToDoTask,
+    taskId: getRndInteger(minId, maxId),
+    title: newTaskTitle,
+    description: newTaskTitle,
+  }
   taskList = [...taskList, task];
   localStorage.setItem("taskListLS", JSON.stringify(taskList));
 };
@@ -100,7 +99,6 @@ const addTaskItemToTaskListHtml = (task) => {
 
 const listTasks = () => {
   let taskListLS = localStorage.getItem("taskListLS");
-
   if (taskListLS) {
     taskList = JSON.parse(taskListLS);
     for (let i = 0; i < taskList.length; i++) {
@@ -109,4 +107,21 @@ const listTasks = () => {
   }
 };
 
-listTasks();
+const todoNothing = () => {
+  const noneToDo = `<li class="todo-list-none">
+                      <span>Nothing to list here...</span>
+                      <span>to create a To-Do click "+" icon.</span>
+                    </li>`;
+  document.getElementById("todo-list").insertAdjacentHTML("beforeend",noneToDo);
+}
+
+window.addEventListener('load', (event) => {
+  taskListLS = JSON.parse(localStorage.getItem("taskListLS"));
+  if (taskListLS) {
+    taskList = taskListLS;
+      listTasks();
+  }
+  else {
+    todoNothing();
+  }
+});
