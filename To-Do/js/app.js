@@ -26,6 +26,12 @@ const toggleAddContainer = () => {
   document.getElementById("add-task-container").classList.toggle("show");
 };
 
+const toggleEditContainer = () => {
+  document.getElementById("add-background").classList.toggle("add-background");
+  document.getElementById("todo-header").classList.toggle("index-back");
+  document.getElementById("todo-list-section").classList.toggle("index-back");
+  document.getElementById("edit-task-container").classList.toggle("show");
+}
 
 const clearTaskList = () => {
   taskList = [];
@@ -33,6 +39,20 @@ const clearTaskList = () => {
   document.getElementById("todo-list").innerHTML = "";
   todoNothing();
 };
+
+const hideContainers = () => {
+  document.getElementById("add-background").classList.toggle("add-background");
+  document.getElementById("todo-header").classList.toggle("index-back");
+  document.getElementById("todo-list-section").classList.toggle("index-back");
+  let addContainer = document.getElementById("add-task-container");
+  let editContainer = document.getElementById("edit-task-container");
+  if (addContainer.classList.contains("show")) {
+    addContainer.classList.remove("show");
+  }
+  if (editContainer.classList.contains("show")) {
+    editContainer.classList.remove("show");
+  }
+}
 
 const checkTheTask = (clicked_id) => {
   document.getElementById(clicked_id).parentElement.classList.toggle("todo-checked")
@@ -78,17 +98,47 @@ const createTask = () => {
       taskId: getRndInteger(minId, maxId),
       title: newTaskTitle,
       description: newTaskDescription,
-    }
+    };
     taskList = [...taskList, task];
     localStorage.setItem("taskListLS", JSON.stringify(taskList));
   };
-}
+};
+
+const editTheTask = (clicked_id) => {
+  toggleEditContainer();
+  let clickedTaskId = parseInt(clicked_id.split("-")[1]);
+  let editTaskTitle = document.getElementById("edit-task-title");
+  let editTaskDescription = document.getElementById("edit-task-description");
+  let editButton = document.querySelector(".todo-edit-button").id = clicked_id;
+  let clickedTask = taskList.find((obj) => {
+    return obj.taskId === clickedTaskId;
+  });
+  editTaskTitle.value = clickedTask.title;
+  editTaskDescription.value = clickedTask.description;
+};
+
+const reCreateTheTask = (clicked_id) => {
+  let clickedTaskId = parseInt(clicked_id.split("-")[1]);
+  let newTaskTitle = document.getElementById("edit-task-title").value;
+  let newTaskDescription = document.getElementById("edit-task-description").value;
+  let clickedTask = taskList.find((obj) => {
+    return obj.taskId === clickedTaskId;
+  });
+  if (newTaskTitle || newTaskDescription) {
+    clickedTask.title = newTaskTitle;
+    clickedTask.description = newTaskDescription;
+    localStorage.setItem("taskListLS", JSON.stringify(taskList));
+  }
+  else {
+    deleteTheTask(clicked_id);
+  }
+};
 
 const addTaskItemToTaskListHtml = (task) => {
   const taskListEl = document.getElementById("todo-list");
   const taskItemHtml = `<li class="todo-record row ${isChecked[task.isCompleted]}">
                           <button class="todo-checkbox col-1 offset-1 col-md-1 offset-md-1" onclick="checkTheTask(this.id)" id="task-${task.taskId}"></button>
-                          <div class="todo-record-text col-8 col-md-8">
+                          <div class="todo-record-text col-8 col-md-8"  onclick="editTheTask(this.id)" id="task-${task.taskId}">
                             <h2>
                               ${task.title}
                               <div class="text-line-through"></div>
@@ -124,7 +174,7 @@ window.addEventListener('load', (event) => {
   taskListLS = JSON.parse(localStorage.getItem("taskListLS"));
   if (taskListLS) {
     taskList = taskListLS;
-      listTasks();
+    listTasks();
   }
   else {
     todoNothing();

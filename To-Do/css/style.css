@@ -67,6 +67,14 @@ h4 {
   margin-top: 36px !important;
   margin-left: 34px !important;
   height: 48px !important;
+  cursor: context-menu;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .todo-button-group {
@@ -143,6 +151,7 @@ h4 {
   align-items: center;
   margin-left: 0 !important;
   margin-right: 0 !important;
+  cursor: pointer;
 }
 
 .todo-checkbox {
@@ -192,6 +201,7 @@ h4 {
 
 .todo-checked {
   background: #ebe8ed;
+  transition: 0.5s !important;
 }
 
 .todo-checked .todo-checkbox {
@@ -242,6 +252,7 @@ h4 {
   border-radius: 20px;
   box-shadow: 0px -50px 100px 20px rgba(0, 0, 0, 0.4);
   background-color: #00000030;
+  z-index: 10;
 }
 
 @keyframes openModal {
@@ -278,6 +289,7 @@ h4 {
 
 .index-back {
   z-index: -1 !important;
+  cursor: none !important;
 }
 
 .add-background {
@@ -289,6 +301,7 @@ h4 {
   transition: 2s;
   border-radius: 20px;
   margin: 0 !important;
+  z-index: 1;
 }
 
 
@@ -364,6 +377,17 @@ h4 {
   border-radius: 4px !important;
 }
 
+.todo-edit-button {
+  margin-top: 22px !important;
+  width: 90%;
+  height: 53px;
+  background: #c361ff;
+  border: 2px solid rgba(139, 0, 225, 0.7);
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 4px !important;
+}
+
 .todo-check-img {
   color: white;
   font-size: 20px;
@@ -373,6 +397,17 @@ h4 {
 }
 
 .todo-create-text {
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 27px;
+  text-align: center;
+  color: #ffffff;
+  padding: 0 !important;
+}
+
+.todo-edit-text {
   text-transform: uppercase;
   font-style: normal;
   font-weight: 900;

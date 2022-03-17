@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="app-container">
-      <div class="row col-11 mx-auto" id="add-background" onclick="toggleAddContainer()"></div>
+      <div class="row col-11 mx-auto" id="add-background" onclick="hideContainers()"></div>
       <section class="todo-header" id="todo-header">
         <h1 class="todo-title">TODO</h1>
         <div class="todo-button-group d-flex justify-content-end">
@@ -60,7 +60,27 @@
           </button>
         </form>
       </section>
-      
+      <section class="todo-container-add" id="edit-task-container">
+        <form class="todo-add" id="edit-task">
+          <input
+            class="todo-form-title"
+            type="text"
+            id="edit-task-title"
+            maxlength="50"
+          />
+          <textarea
+            class="todo-form-description"
+            name=""
+            id="edit-task-description"
+            maxlength="200"
+            type="text"
+            spellcheck="false"
+          ></textarea>
+          <button class="todo-edit-button" id="" onclick="reCreateTheTask(this.id)">
+            <span class="todo-edit-text">Edit</span>
+          </button>
+        </form>
+      </section>
     </div>
     <script src="js/app.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
